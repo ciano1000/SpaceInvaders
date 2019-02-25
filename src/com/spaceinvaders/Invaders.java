@@ -13,6 +13,9 @@ public class Invaders extends JFrame implements Runnable, KeyListener {
     public static final int NUMALIENS = 30;
 
     private boolean isInitialised = false;
+    private boolean isGameRunning = true;
+    private int score = 0;
+    private int bestScore = 0;
 
     private AlienFormation formation;
     private ArrayList<Alien> aliens;
@@ -148,6 +151,7 @@ public class Invaders extends JFrame implements Runnable, KeyListener {
                        if(((x1<x2 && x1+w1>x2)||(x2<x1&&x2+w2>x1)) &&((y1<y2 && y1+h1>y2)||(y2<y1&&y2+h2>y1)))
                        {
                            alien.isAlive = false;
+                           score+=50;
                            iterator.remove();
                            break;
                        }
@@ -179,6 +183,13 @@ public class Invaders extends JFrame implements Runnable, KeyListener {
                 bullets.get(i).paint(g);
             }
         }
+
+        //string drawing
+        g.setColor(Color.GREEN);
+        Font courier = new Font ("Courier", Font.BOLD, 24);
+        g.setFont(courier);
+        g.drawString("Score: "+score, 263, 75);
+        g.drawString("High Score: "+bestScore,463,75);
         player.paint(g);
         strategy.show();
     }
